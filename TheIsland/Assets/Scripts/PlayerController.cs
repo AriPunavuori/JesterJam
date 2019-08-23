@@ -6,12 +6,12 @@ public class PlayerController : MonoBehaviour {
 
     float verticalMovement;
     float horizontalMovement;
-    public float moveSpeed = 500f;
-    public float jumpForce = 500f;
-    public float fallDecelerationFactor = 100f;
-    public float jumpTime = 0.25f;
-    public float jumpTimer = 0.25f;
-    public Rigidbody2D rb;
+    float moveSpeed = 500f;
+    float jumpForce = 7500f;
+    float fallDecelerationFactor = 350f;
+    float jumpTime = 0.35f;
+    float jumpTimer = 0.35f;
+    Rigidbody2D rb;
 
     public bool onGround = false;
     public bool jumpButtonLifted;
@@ -64,6 +64,9 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision) {
         onGround = false;
+        if(jumpButtonLifted) {
+            jumpTimer = 0f;
+        }
     }
 
 }
