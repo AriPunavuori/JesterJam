@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     float jumpTime = 0.35f;
     float jumpTimer = 0.35f;
     Rigidbody2D rb;
+    public GameObject banana;
 
     public bool onGround = false;
     public bool jumpButtonLifted;
@@ -31,6 +32,12 @@ public class PlayerController : MonoBehaviour {
                 jumpTimer = jumpTime;
             }
 
+        }
+        if(Input.GetButtonDown("Fire1")) {
+            if(banana != null) {
+                var bs =  banana.GetComponent<Banana>();
+                bs.ThrowBanana();
+            }
         }
     }
 
@@ -59,7 +66,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        onGround = true;
+        if(collision.tag == "Environment") {
+            onGround = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
