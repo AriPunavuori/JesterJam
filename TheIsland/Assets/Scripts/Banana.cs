@@ -9,11 +9,15 @@ public class Banana : MonoBehaviour {
     float lifetime = 2f;
     Vector2 target;
     PlayerController pc;
+    Rigidbody2D rb;
 
+    private void Awake() {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update() {
         if(bananaThrown) {
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
             lifetime -= Time.deltaTime;
             if(lifetime < 0) {
@@ -23,8 +27,8 @@ public class Banana : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        print(collision);
-        if(collision.tag == "Player") {
+ 
+        if(collision.tag == "Player" && !bananaThrown) {
             
             pc = collision.GetComponent<PlayerController>();
             if(pc.banana == null) {
@@ -32,14 +36,19 @@ public class Banana : MonoBehaviour {
                 transform.parent = collision.gameObject.transform;
                 pc.banana = this.gameObject;
             }
-            
+        }
+        if(collision.tag == "Enemy") {
+            var es = collision.GetComponent<Enemy>();
+            es.EatBanana();
         }
     }
 
     public void ThrowBanana() {
-        pc.banana = null;
         transform.parent = null;
-        target = transform.position + new Vector3(15, 15, 0);
+        pc.banana = null;
+        rb.isKinematic = false;
+        target = new Vector3(7.5f, 7.5f, 0);
+        rb.AddForce(target, ForceMode2D.Impulse);
         bananaThrown = true;
     }
 }
