@@ -17,8 +17,6 @@ public class Banana : MonoBehaviour {
 
     void Update() {
         if(bananaThrown) {
-            //transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
             lifetime -= Time.deltaTime;
             if(lifetime < 0) {
                 Destroy(gameObject);
@@ -29,10 +27,10 @@ public class Banana : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
  
         if(collision.tag == "Player" && !bananaThrown) {
-            
             pc = collision.GetComponent<PlayerController>();
             if(pc.banana == null) {
                 bp.TakeBanana();
+                transform.position = collision.transform.position;
                 transform.parent = collision.gameObject.transform;
                 pc.banana = this.gameObject;
             }
@@ -40,6 +38,7 @@ public class Banana : MonoBehaviour {
         if(collision.tag == "Enemy") {
             var es = collision.GetComponent<Enemy>();
             es.EatBanana();
+            Destroy(gameObject);
         }
     }
 
@@ -47,7 +46,7 @@ public class Banana : MonoBehaviour {
         transform.parent = null;
         pc.banana = null;
         rb.isKinematic = false;
-        target = new Vector3(7.5f, 7.5f, 0);
+        target = new Vector3(7.5f, 8.5f, 0);
         rb.AddForce(target, ForceMode2D.Impulse);
         bananaThrown = true;
     }

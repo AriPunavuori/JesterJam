@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 
     void MoveHorizontal() {
         rb.velocity = new Vector2(horizontalMovement * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        Flip();
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
@@ -72,10 +73,25 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        onGround = false;
-        if(jumpButtonLifted) {
-            jumpTimer = 0f;
+        if(collision.tag == "Environment") {
+            onGround = false;
+            if(jumpButtonLifted) {
+                jumpTimer = 0f;
+            }
         }
+    }
+
+    void Flip() {
+        if(horizontalMovement > 0) {
+            transform.localScale = new Vector3(1, 1, 1);
+        } else if(horizontalMovement < 0) {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    public void PlayerHit() {
+        // Tee jotakin
+        print("Player Hit!");
     }
 
 }

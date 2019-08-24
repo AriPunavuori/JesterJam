@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
-    public Transform target;
+    GameObject target;
+
+    private void Start() {
+        target = GameObject.Find("Player");
+    }
 
     void Update() {
         Vector2 targetPos;
-        targetPos.x = target.position.x;
-        targetPos.y = target.position.y;
-
+        targetPos.x = target.transform.position.x;
+        targetPos.y = target.transform.position.y;
         transform.position = new Vector3(targetPos.x, targetPos.y, -10);
     }
 }

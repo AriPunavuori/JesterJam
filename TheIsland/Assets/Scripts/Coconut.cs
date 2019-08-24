@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Coconut : MonoBehaviour {
-    float startTime = .1f;
+    float startTime = .05f;
     float lifetime = 1;
-    float speed = 10;
+    float speed = 15;
     bool coconutThrown;
     Vector2 target;
     Rigidbody2D rb;
-
-
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -28,15 +26,19 @@ public class Coconut : MonoBehaviour {
         if(lifetime < 0) {
             Destroy(gameObject);
         }
-        
     }
 
     void ThrowCoconut() {
-        print("Cononut liftoff");
         var player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform.position - transform.position;
-        print(target);
         rb.isKinematic = false;
         rb.AddForce(target * 2, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.tag == "Player") {
+            var pc = collision.GetComponent<PlayerController>();
+            pc.PlayerHit();
+        }
     }
 }

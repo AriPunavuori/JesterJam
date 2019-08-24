@@ -8,25 +8,25 @@ public class Enemy : MonoBehaviour {
     public float ammoSpawnInterval = 1;
     public float ammoSpawnTimer;
     public float eatingBananaTime = 5f;
+    public float throwDistance = 15f;
     bool shouldThrowCoconut;
+    GameObject player;
+
+    private void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update() {
+        if(Vector2.Distance(player.transform.position, transform.position) < throwDistance) {
+            shouldThrowCoconut = true;
+        } else {
+            shouldThrowCoconut = false;
+        }
         ammoSpawnTimer -= Time.deltaTime;
         if(shouldThrowCoconut) {
             if(ammoSpawnTimer < 0) {
                 ThrowCoconut();
             }
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision) {
-        if(collision.tag == "Player") {
-            shouldThrowCoconut = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision) {
-        if(collision.tag == "Player") {
-            shouldThrowCoconut = false;
         }
     }
 
@@ -37,6 +37,5 @@ public class Enemy : MonoBehaviour {
 
     public void EatBanana() {
         ammoSpawnTimer = eatingBananaTime;
-        print("Eating Banana");
     }
 }
