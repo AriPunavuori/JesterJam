@@ -27,25 +27,27 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        PauseMenuUI.SetActive = false;
+        PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
     void Pause()
     {
-        PauseMenuUI.S
+        PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
     public void MainMenu()
     {
+
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
     {
-        Application.Quit;
+        //Application.Quit;
     }
 }

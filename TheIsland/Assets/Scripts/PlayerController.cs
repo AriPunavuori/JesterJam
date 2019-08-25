@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool onGround = false;
     public bool jumpButtonLifted;
+    public Animator animator;
 
 
     private void Start() {
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
         verticalMovement = Input.GetAxisRaw("Vertical");
         if(Mathf.Abs(verticalMovement) < 0.1f) {
             jumpButtonLifted = true;
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
-        if(Input.GetButtonDown("Fire1")) {
+        if(Input.GetButtonDown("Fire1")||Input.GetKeyDown(KeyCode.Space)) {
             if(banana != null) {
                 gm.PlaySound(0);
                 var bs =  banana.GetComponent<Banana>();
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 
     public void PlayerHit() {
         gm.PlaySound(1);
-        transform.position = startPoint.position;
+        gm.SetHealth(-1);
     }
 
 }
