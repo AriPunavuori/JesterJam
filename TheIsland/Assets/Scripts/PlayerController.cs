@@ -29,14 +29,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+
         verticalMovement = Input.GetAxisRaw("Vertical");
+
         if(Mathf.Abs(verticalMovement) < 0.1f) {
             jumpButtonLifted = true;
+            animator.SetBool("IfJumping", true);
             jumpTimer = 0f;
             if(onGround) {
                 jumpTimer = jumpTime;
+                animator.SetBool("IfJumping", false);
             }
 
         }

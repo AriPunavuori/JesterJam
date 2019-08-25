@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     TextMeshProUGUI uiText;
     float textTimer = 5f;
     float textTime = 2f;
+    public GameObject completeLevelUi;
 
     private void Start() {
         uiText = GameObject.Find("UIText").GetComponent<TextMeshProUGUI>();
@@ -49,8 +50,6 @@ public class GameManager : MonoBehaviour {
         uiText.text = text;
 
     }
-
-    public GameObject completeLevelUi;
 
     public void CompleteLevel()
     {
