@@ -15,12 +15,14 @@ public class PlayerController : MonoBehaviour {
     public GameObject banana;
     bool facingRight = true;
     Transform startPoint;
+    GameManager gm;
 
     public bool onGround = false;
     public bool jumpButtonLifted;
 
 
     private void Start() {
+        gm = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody2D>();
         startPoint = GameObject.Find("StartPoint").transform;
     }
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour {
         }
         if(Input.GetButtonDown("Fire1")) {
             if(banana != null) {
+                gm.PlaySound(0);
                 var bs =  banana.GetComponent<Banana>();
                 bs.ThrowBanana(facingRight);
             }
@@ -95,8 +98,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void PlayerHit() {
-        // Tee jotakin
-        print("Player Hit!");
+        gm.PlaySound(1);
         transform.position = startPoint.position;
     }
 
