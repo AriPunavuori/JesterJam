@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
-        if(Input.GetButtonDown("Fire1")) {
+        if(Input.GetButtonDown("Fire1")||Input.GetKeyDown(KeyCode.Space)) {
             if(banana != null) {
                 gm.PlaySound(0);
                 var bs =  banana.GetComponent<Banana>();
