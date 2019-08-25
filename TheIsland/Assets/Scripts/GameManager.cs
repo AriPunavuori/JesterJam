@@ -49,4 +49,11 @@ public class GameManager : MonoBehaviour {
         uiText.text = text;
 
     }
+
+    public GameObject completeLevelUi;
+
+    public void CompleteLevel()
+    {
+        completeLevelUi.SetActive(true);
+    }
 }
