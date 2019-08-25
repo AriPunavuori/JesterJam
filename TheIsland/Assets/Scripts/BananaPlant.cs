@@ -11,8 +11,8 @@ public class BananaPlant : MonoBehaviour {
     void Update() {
         if(bananaTaken) {
             if(bananaSpantimer < 0) {
-                Instantiate(banana, transform.position + new Vector3(0,1,0), Quaternion.identity);
-                var bs = banana.GetComponent<Banana>();
+                var bananaClone = Instantiate(banana, transform.position + new Vector3(0,1,0), Quaternion.identity);
+                var bs = bananaClone.GetComponent<Banana>();
                 bs.bp = this;
                 bananaTaken = false;
             }
