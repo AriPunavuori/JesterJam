@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     float jumpTimer = 0.35f;
     Rigidbody2D rb;
     public GameObject banana;
+    bool facingRight = true;
+    Transform startPoint;
 
     public bool onGround = false;
     public bool jumpButtonLifted;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        startPoint = GameObject.Find("StartPoint").transform;
     }
 
     void Update() {
@@ -36,7 +39,7 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetButtonDown("Fire1")) {
             if(banana != null) {
                 var bs =  banana.GetComponent<Banana>();
-                bs.ThrowBanana();
+                bs.ThrowBanana(facingRight);
             }
         }
     }
@@ -84,14 +87,17 @@ public class PlayerController : MonoBehaviour {
     void Flip() {
         if(horizontalMovement > 0) {
             transform.localScale = new Vector3(1, 1, 1);
+            facingRight = true;
         } else if(horizontalMovement < 0) {
             transform.localScale = new Vector3(-1, 1, 1);
+            facingRight = false;
         }
     }
 
     public void PlayerHit() {
         // Tee jotakin
         print("Player Hit!");
+        transform.position = startPoint.position;
     }
 
 }

@@ -25,7 +25,7 @@ public class Banana : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
- 
+
         if(collision.tag == "Player" && !bananaThrown) {
             pc = collision.GetComponent<PlayerController>();
             if(pc.banana == null) {
@@ -42,11 +42,14 @@ public class Banana : MonoBehaviour {
         }
     }
 
-    public void ThrowBanana() {
+    public void ThrowBanana(bool facing) {
         transform.parent = null;
         pc.banana = null;
         rb.isKinematic = false;
-        target = new Vector3(7.5f, 8.5f, 0);
+        if(facing)
+            target = new Vector3(7.5f, 8.5f, 0);
+        else
+            target = new Vector3(-7.5f, 8.5f, 0);
         rb.AddForce(target, ForceMode2D.Impulse);
         bananaThrown = true;
     }
