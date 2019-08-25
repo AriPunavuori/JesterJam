@@ -11,8 +11,10 @@ public class Enemy : MonoBehaviour {
     public float throwDistance = 15f;
     bool shouldThrowCoconut;
     GameObject player;
+    GameManager gm;
 
     private void Start() {
+        gm = FindObjectOfType<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -33,9 +35,11 @@ public class Enemy : MonoBehaviour {
     void ThrowCoconut() {
         Instantiate(ammoPrefab, transform.position, Quaternion.identity);
         ammoSpawnTimer = ammoSpawnInterval;
+        gm.PlaySound(3);
     }
 
     public void EatBanana() {
         ammoSpawnTimer = eatingBananaTime;
+        gm.PlaySound(2);
     }
 }
