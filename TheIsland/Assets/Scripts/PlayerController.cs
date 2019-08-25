@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool onGround = false;
     public bool jumpButtonLifted;
+    public Animator animator;
 
 
     private void Start() {
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
         verticalMovement = Input.GetAxisRaw("Vertical");
         if(Mathf.Abs(verticalMovement) < 0.1f) {
             jumpButtonLifted = true;
