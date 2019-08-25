@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 
     public void PlayerHit() {
         gm.PlaySound(1);
-        transform.position = startPoint.position;
+        gm.SetHealth(-1);
     }
 
 }

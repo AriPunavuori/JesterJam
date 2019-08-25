@@ -9,6 +9,7 @@ public class Coconut : MonoBehaviour {
     bool coconutThrown;
     Vector2 target;
     Rigidbody2D rb;
+    bool playerHit;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -38,7 +39,11 @@ public class Coconut : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag == "Player") {
             var pc = collision.GetComponent<PlayerController>();
-            pc.PlayerHit();
+            if (!playerHit) {
+                pc.PlayerHit();
+                playerHit = true;
+            }
+
         }
     }
 }
