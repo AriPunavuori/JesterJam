@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
     public float ammoSpawnInterval = 1;
     public float ammoSpawnTimer;
     public float eatingBananaTime = 5f;
-    public float throwDistance = 15f;
+    public float throwDistance = 20f;
     bool shouldThrowCoconut;
     GameObject player;
     GameManager gm;

@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour {
 
     float verticalMovement;
     float horizontalMovement;
-    float moveSpeed = 500f;
-    float jumpForce = 7500f;
-    float fallDecelerationFactor = 350f;
+    float moveSpeed = 150f;
+    float jumpForce = 5000f;
+    float fallDecelerationFactor = 300f;
     float jumpTime = 0.35f;
     float jumpTimer = 0.35f;
     Rigidbody2D rb;
